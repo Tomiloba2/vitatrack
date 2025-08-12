@@ -1,4 +1,4 @@
-import { Box, Button, Container, Flex, Image, Paper, Text, TextInput } from "@mantine/core";
+import { Box, Button, Container, Flex, Image, Paper, Stack, Text, TextInput } from "@mantine/core";
 import { isEmail, useForm } from "@mantine/form";
 import Logo from "../../assests/logo.png"
 import Hero from "../../assests/hero.png"
@@ -22,8 +22,9 @@ export function ForgotPassword() {
   return (
     <div>
       <Container>
+        <Stack gap={40}>
         <nav>
-          <Box p={10}>
+          <Box pt={10}>
             <Image
               h={70}
               w={70}
@@ -56,7 +57,7 @@ export function ForgotPassword() {
                 alignItems: "center"
               }}>
                 <Paper shadow="lg" p={"xl"} w={"100%"}>
-                  <Text fw={900} size="lg" pb={'md'}>Forgot Password</Text>
+                  <Text fw={700} size="xl" pb={'md'}>Forgot Password</Text>
                   <Box style={{
                     display: "flex",
                     justifyContent: "center",
@@ -79,7 +80,9 @@ export function ForgotPassword() {
             </form>
           </section>
         </Flex>
-      </Container>
+
+        </Stack>
+              </Container>
     </div>
   );
 }

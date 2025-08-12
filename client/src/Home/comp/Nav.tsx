@@ -27,22 +27,22 @@ export function NavBar() {
         </Box>
         {/*Burger state */}
         <Box>
-          <Burger onClick={open} hiddenFrom="sm" color="blue" />
+          <Burger onClick={open} hiddenFrom="sm" color="soft-blue" />
         </Box>
         <Box visibleFrom="sm">
           <Flex justify={"space-between"} gap={20}>
             <Link ref={ref} style={{
               textDecoration: "none",
-              color: `${hovered ? "green" : "blue"}`
+              color: `${hovered ? "green" : "soft-blue"}`
 
             }}
               to={'/'}>Home</Link>
             <Link ref={ref} to='/dashboard' style={{
               textDecoration: "none",
-              color: `${hovered ? "green" : "blue"}`
+              color: `${hovered ? "green" : "soft-blue"}`
 
             }}>Dashboard</Link>
-            <Button onClick={handleClick}>Explore VitaTrack</Button>
+            <Button onClick={handleClick} bg={"soft-blue"}>Explore VitaTrack</Button>
           </Flex>
         </Box>
       </Flex>
@@ -51,16 +51,16 @@ export function NavBar() {
         <Stack h={"80vh"} gap={"xl"} justify="center" align="center">
           <Link ref={ref} style={{
             textDecoration: "none",
-            color: `${hovered ? "green" : "blue"}`
+            color: `${hovered ? "green" : "soft-blue"}`
 
           }}
             to={'/'}>Home</Link>
           <Link ref={ref} to='/dashboard' style={{
             textDecoration: "none",
-            color: `${hovered ? "green" : "blue"}`
+            color: `${hovered ? "green" : "soft-blue"}`
 
           }}>Dashboard</Link>
-          <Button onClick={handleClick} w={"50%"}>Explore VitaTrack</Button>
+          <Button onClick={handleClick}  bg={"soft-blue"} w={"50%"}>Explore VitaTrack</Button>
         </Stack>
       </Drawer>
     </div>

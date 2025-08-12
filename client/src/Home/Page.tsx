@@ -1,15 +1,15 @@
 import { Feature } from "./comp/Features";
 import { Hero } from "./comp/Hero";
 import { NavBar } from "./comp/Nav";
-import { Container } from "@mantine/core";
+import { Box, Container } from "@mantine/core";
 
 export interface IHomeProps {
 }
 
 export function Home() {
   return (
-    <div>
-      <Container >
+    <Box bg={"clean-white.0"} c={"dark-gray.9"}>
+      <Container>
         <section>
           <NavBar />
         </section>
@@ -21,6 +21,6 @@ export function Home() {
           <Feature />
         </section>
       </Container>
-    </div>
+    </Box>
   );
 }
