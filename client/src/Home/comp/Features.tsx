@@ -1,4 +1,4 @@
-import { Card, Flex, Image, Paper, Text } from "@mantine/core";
+import { Card, Flex, Image, Text } from "@mantine/core";
 import respiratory from "../../assests/respiratory-rate.jpg"
 import maternal from "../../assests/maternal-pulse.jpg"
 import temp from "../../assests/temperature.jpg"
@@ -20,7 +20,7 @@ export function Feature() {
       </Text>
       <Flex wrap={"wrap"} justify={"center"} gap={"lg"}>
         <section>
-          <Card shadow="xl" radius='lg' p="xl">
+          <Card shadow="xl" radius='lg'>
             
             <Card.Section>
               <Image
@@ -33,7 +33,7 @@ export function Feature() {
           </Card>
         </section>
         <section>
-          <Card shadow="xl" radius='lg' p="xl">
+          <Card shadow="xl" radius='lg'>
             
             <Card.Section>
               <Image
@@ -46,7 +46,7 @@ export function Feature() {
           </Card>
         </section>
         <section>
-          <Card shadow="xl" radius='lg' p="xl">
+          <Card shadow="xl" radius='lg'>
           <Card.Section>
             <Image
             src={temp}
@@ -58,7 +58,7 @@ export function Feature() {
           </Card>
         </section>
         <section>
-          <Card shadow="xl" radius='lg' p="xl" >
+          <Card shadow="xl" radius='lg'>
             <Card.Section>
               <Image
               src={respiratory}
