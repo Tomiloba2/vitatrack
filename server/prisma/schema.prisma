@@ -1,0 +1,59 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String @id @default(cuid())
+  name        String
+  email       String @unique
+  password    String
+  imgUrl      String
+  contactInfo String
+}
+
+model Patient {
+  id            String   @id @default(cuid())
+  name          String
+  Dob           DateTime
+  imgUrl        String
+  status        Status
+  age           Int
+  contact       String
+  lastMonitored DateTime
+  bloodGroup    String
+  GestationAge  String
+  pregnancyType String
+  EDD           String
+  LMP           String
+  GPAL          String
+  HighRisk      String
+  Vitals        Vitals[]
+}
+
+enum Status {
+  stable
+  critical
+}
+
+model Vitals {
+  id               String   @id @default(cuid())
+  patient          Patient  @relation(fields: [patientId], references: [id])
+  patientId        String
+  heartRate        String
+  Temperature      Int
+  bloodOxygenLevel String
+  RespirationRate  String
+  timeMonitored    DateTime
+}
