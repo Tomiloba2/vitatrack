@@ -1,18 +1,18 @@
 import { Button, Drawer, Burger, Stack, Box, Image, Flex } from "@mantine/core";
-import { useDisclosure, useHover } from "@mantine/hooks";
+import { useDisclosure } from "@mantine/hooks";
 import { Link, useNavigate } from "react-router-dom";
 import Logo from "../../assests/logo.png"
+import styles from "../styles.module.css"
 
 export interface INavBarProps {
 }
 
 export function NavBar() {
   const [opened, { open, close }] = useDisclosure(false)
-  const { hovered, ref } = useHover()
-  const navigate=useNavigate()
-    const handleClick=()=>{
-        navigate('/login')
-    }
+  const navigate = useNavigate()
+  const handleClick = () => {
+    navigate('/login')
+  }
   return (
     <div>
       <Flex justify={"space-between"} align={"center"} wrap={"nowrap"}>
@@ -27,40 +27,24 @@ export function NavBar() {
         </Box>
         {/*Burger state */}
         <Box>
-          <Burger onClick={open} hiddenFrom="sm" color="soft-blue" />
+          <Burger onClick={open} hiddenFrom="sm" color="soft-blue" size={"sm"} />
         </Box>
         <Box visibleFrom="sm">
           <Flex justify={"space-between"} gap={20}>
-            <Link ref={ref} style={{
-              textDecoration: "none",
-              color: `${hovered ? "green" : "soft-blue"}`
-
-            }}
+            <Link className={styles.link}
               to={'/'}>Home</Link>
-            <Link ref={ref} to='/dashboard' style={{
-              textDecoration: "none",
-              color: `${hovered ? "green" : "soft-blue"}`
-
-            }}>Dashboard</Link>
-            <Button onClick={handleClick} bg={"soft-blue"}>Explore VitaTrack</Button>
+            <Link to='/dashboard' className={styles.link}>Dashboard</Link>
+            <Button onClick={handleClick} className={styles.cta}>Explore VitaTrack</Button>
           </Flex>
         </Box>
       </Flex>
-{/*Drawer component */}
+      {/*Drawer component */}
       <Drawer opened={opened} onClose={close}>
         <Stack h={"80vh"} gap={"xl"} justify="center" align="center">
-          <Link ref={ref} style={{
-            textDecoration: "none",
-            color: `${hovered ? "green" : "soft-blue"}`
-
-          }}
+          <Link className={styles.link}
             to={'/'}>Home</Link>
-          <Link ref={ref} to='/dashboard' style={{
-            textDecoration: "none",
-            color: `${hovered ? "green" : "soft-blue"}`
-
-          }}>Dashboard</Link>
-          <Button onClick={handleClick}  bg={"soft-blue"} w={"50%"}>Explore VitaTrack</Button>
+          <Link  to='/dashboard'className={styles.link}>Dashboard</Link>
+          <Button onClick={handleClick} w={"50%"} className={styles.cta}>Explore VitaTrack</Button>
         </Stack>
       </Drawer>
     </div>

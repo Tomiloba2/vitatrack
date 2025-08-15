@@ -1,30 +1,25 @@
 import { Avatar, Table, Pagination, Paper, Box } from "@mantine/core";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import styles from '../styles.module.css'
 
 export interface IPatientsProps {
+    lists: {
+        img: string;
+        initials: string;
+        name: string;
+        id: number;
+        status: string;
+        lM: string
+    }[]
 }
 
-export function Patients() {
-    const lists = [
-        { img: "", initials: "OD", name: "Oluwabori David Suara", id: 12345, status: "critical", lM: "21mins" },
-        { img: "", initials: "OD", name: "Oluwabori David Suara", id: 12345, status: "stable", lM: "21mins" },
-        { img: "", initials: "OD", name: "Oluwabori David Suara", id: 12345, status: "critical", lM: "21mins" },
-        { img: "", initials: "OD", name: "Oluwabori David Suara", id: 12345, status: "critical", lM: "21mins" },
-        { img: "", initials: "OD", name: "Oluwabori David Suara", id: 12345, status: "stable", lM: "21mins" },
-        { img: "", initials: "OD", name: "Oluwabori David Suara", id: 12345, status: "critical", lM: "21mins" },
-        { img: "", initials: "OD", name: "Oluwabori David Suara", id: 12345, status: "critical", lM: "21mins" },
-        { img: "", initials: "OT", name: "Oluwabori David Suara", id: 12345, status: "critical", lM: "21mins" },
-        { img: "", initials: "OT", name: "Oluwabori David Suara", id: 12345, status: "critical", lM: "21mins" },
-        { img: "", initials: "OT", name: "Oluwabori David Suara", id: 12345, status: "stable", lM: "21mins" },
-        { img: "", initials: "OT", name: "Oluwabori David Suara", id: 12345, status: "critical", lM: "21mins" },
-        { img: "", initials: "OT", name: "Oluwabori David Suara", id: 12345, status: "critical", lM: "21mins" },
-        { img: "", initials: "Os", name: "Oluwabori David Suara", id: 12345, status: "stable", lM: "21mins" },
-        { img: "", initials: "Os", name: "Oluwabori David Suara", id: 12345, status: "critical", lM: "21mins" },
-        { img: "", initials: "Os", name: "Oluwabori David Suara", id: 12345, status: "critical", lM: "21mins" },
-        { img: "", initials: "Os", name: "Oluwabori David Suara", id: 12345, status: "critical", lM: "21mins" },
-    ]
+export function Patients(props: IPatientsProps) {
+    const { lists } = props
+    const navigate = useNavigate()
+
     //records to display on apage
-    const [recordPerpage] = useState(10)
+    const [recordPerpage] = useState(6)
     //determing the number of pages
     const numberOfPages = Math.ceil(lists.length / recordPerpage)
     //current page number
@@ -35,10 +30,12 @@ export function Patients() {
     const firstRecordIndex = lastRecordIndex - recordPerpage
     //records to display by slicing the array
     const currentRecords = lists.slice(firstRecordIndex, lastRecordIndex)
-    
-    
+
+    // filter function
+
+
     const rows = currentRecords.map((item) => (
-        <Table.Tr key={item.id}>
+        <Table.Tr key={item.id} onClick={() => navigate("/patient")} className={styles.tableRow}>
             <Table.Td>
                 <Avatar src={item.img}>{item.initials}</Avatar>
             </Table.Td>
@@ -63,10 +60,10 @@ export function Patients() {
                 <Table.Tbody>{rows}</Table.Tbody>
             </Table>
             <Box style={{
-                display:"flex",
-                justifyContent:"center"
+                display: "flex",
+                justifyContent: "center"
             }}>
-                <Pagination siblings={1} total={numberOfPages} value={currentPage} onChange={setCurrentPage} pt={20}/>
+                <Pagination siblings={1} total={numberOfPages} value={currentPage} onChange={setCurrentPage} pt={20} />
             </Box>
         </Paper>
     );

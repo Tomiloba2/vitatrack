@@ -1,31 +1,54 @@
-import { Box, Container, Stack } from "@mantine/core";
+import { Box, Container, Drawer, Stack } from "@mantine/core";
 import { Navbar } from "./component/Nav";
-import { FilterComp } from "./component/Filter";
-import { Patients } from "./component/Patients";
-import { AverageTemperature } from "./Charts/BodyTemperature";
-import { HealthStatus } from "./Charts/HealthCondition";
-import { PulseRate } from "./Charts/PulseRate";
+import { SideBar } from "./component/Sidebar";
+import { useDisclosure } from "@mantine/hooks";
+import { Outlet } from "react-router-dom";
 
 export interface IDashboardProps {
 }
 
 export function Dashboard() {
+  const [opened, { open, close }] = useDisclosure(false)
   return (
-    <div>
-      <Container>
-        <Stack gap={10}>
-          <Box><Navbar /></Box>
-          <Box><FilterComp /></Box>
-          <Box><HealthStatus /></Box>
-          <Box><Patients /></Box>
-          <Stack gap={100}>
-
-            <Box><AverageTemperature /></Box>
-            <Box><PulseRate /></Box>
-
-          </Stack>
-        </Stack>
-      </Container>
-    </div>
+    <Box>
+      <Box style={{
+        overflow: "hidden",
+        height: "100vh"
+      }}>
+        <Box style={{
+          display: "flex",
+          height: "100%"
+        }}>
+          <Box visibleFrom="xs" style={{
+            flex: "1 0 10%",
+          }}>
+            <SideBar isClose={close} />
+          </Box>
+          <Box style={{
+            flex: "4",
+            overflow: "auto"
+          }}>
+            <Container>
+              <Stack gap={10} style={{
+                overflow: 'hidden',
+                height: "100vh",
+              }}>
+                <Box>
+                  <Navbar isOpen={open} />
+                </Box>
+                <Box style={{
+                  overflow: "auto"
+                }}>
+                  <Outlet />
+                </Box>
+              </Stack>
+            </Container>
+          </Box>
+        </Box>
+      </Box>
+      <Drawer opened={opened} onClose={close}>
+        <SideBar isClose={close} />
+      </Drawer>
+    </Box>
   );
 }

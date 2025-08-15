@@ -1,14 +1,18 @@
-import { Avatar, Box, Flex, Group, Image, Paper, Stack, Text } from "@mantine/core";
+import { Avatar, Box, Flex, Group, Image, Paper, Text } from "@mantine/core";
 import logo from "../../assests/logo.png"
 import {
-    MdNotifications, MdSettings, MdLogout
+    MdNotifications, MdSettings, MdLogout,
+    MdMenu
 } from "react-icons/md"
+import { useNavigate } from "react-router-dom";
 
 
 export interface INavbarProps {
+    isOpen: () => void
 }
 
-export function Navbar() {
+export function Navbar(props: INavbarProps) {
+    const navigate = useNavigate()
     return (
         <Paper shadow="lg" p={5}>
             <Flex
@@ -30,12 +34,13 @@ export function Navbar() {
                     <Text size="xs">Isaac Adedara</Text>
                 </Box>
                 <Group>
-                    <Box><MdNotifications style={{
+                    <Box hiddenFrom="xs"><MdMenu color="gray" cursor={"pointer"} size={20} onClick={props.isOpen} /></Box>
+                    <Box><MdNotifications onClick={()=>navigate('/dashboard/notifications')} style={{
                         color: "gray",
                         fontSize: "20px",
                         cursor: "pointer"
                     }} /></Box>
-                    <Box><MdSettings style={{
+                    <Box><MdSettings onClick={()=>navigate('/dashboard/settings')} style={{
                         color: "gray",
                         fontSize: "20px",
                         cursor: "pointer"

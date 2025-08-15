@@ -4,6 +4,7 @@ import {
     Stack
 } from '@mantine/core';
 import { useNavigate } from 'react-router-dom';
+import styles from '../styles.module.css'
 
 export interface IHeroProps {
 }
@@ -31,7 +32,7 @@ export function Hero() {
                             Vita track delivers real-time vital signs for pregnant patients securely to you.
                             Track their health, stay informed and act fast
                         </Text>
-                        <Button onClick={handleClick} bg={"soft-blue"} w={{base:"50%",xs:"70%",sm:"40%"}}>Explore VitaTrack</Button>
+                        <Button className={styles.cta} onClick={handleClick} w={{base:"50%",xs:"70%",sm:"40%"}}>Explore VitaTrack</Button>
                     </Stack>
                 </section>
                 <section>
