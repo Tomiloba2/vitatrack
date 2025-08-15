@@ -35,7 +35,7 @@ export function Patients(props: IPatientsProps) {
 
 
     const rows = currentRecords.map((item) => (
-        <Table.Tr key={item.id} onClick={() => navigate("/patient")} className={styles.tableRow}>
+        <Table.Tr key={item.id} onClick={() => navigate("/dashboard/patient")} className={styles.tableRow}>
             <Table.Td>
                 <Avatar src={item.img}>{item.initials}</Avatar>
             </Table.Td>

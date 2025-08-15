@@ -14,7 +14,7 @@ export interface INavbarProps {
 export function Navbar(props: INavbarProps) {
     const navigate = useNavigate()
     return (
-        <Paper shadow="lg" p={5}>
+        <Paper shadow="sm" p={2}>
             <Flex
                 justify={"space-between"}
             >

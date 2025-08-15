@@ -1,7 +1,11 @@
 import { Card, Image, Table, Tabs, Text } from "@mantine/core";
-import Img from "../../assests/file_000000002aa0620aa3f9d707cb9f0974 (1).png"
+import Img from "../assests/file_000000002aa0620aa3f9d707cb9f0974 (1).png"
 import { useNavigate } from "react-router-dom";
-import styles from "../../Dashboard/styles.module.css"
+import styles from "../Dashboard/styles.module.css"
+import { BodyTemp } from "./pages/vitals/BodyTemperature";
+import { PulseRate } from "./pages/vitals/PulseRate";
+import { BloodOxygen } from "./pages/vitals/BloodOxygen";
+import { RespirationRate } from "./pages/vitals/RespirationRate";
 
 
 export interface IPatientRecordProps {
@@ -28,15 +32,19 @@ export function PatientRecord() {
     ]
     return (
         <div >
-            <Tabs defaultValue={'first'}>
+            <Tabs defaultValue={'first'} pt={20} variant={'outline'}>
                 <Tabs.List>
                     <Tabs.Tab value='first'>Patient Info</Tabs.Tab>
                     <Tabs.Tab value='second'>Vital Info</Tabs.Tab>
+                    <Tabs.Tab value='third'>Body Temperature</Tabs.Tab>
+                    <Tabs.Tab value='fourth'>Heart Rate</Tabs.Tab>
+                    <Tabs.Tab value='fifth'>Blood Oxygen Level</Tabs.Tab>
+                    <Tabs.Tab value='sixth'>Respiration Rate</Tabs.Tab>
                 </Tabs.List>
                 <Tabs.Panel value="first">
                     <Card pt={20}>
                         <Card.Section style={{
-                            padding:"20px",
+                            padding: "20px",
                             height: "100%",
                             display: "flex",
                             alignItems: "center"
@@ -74,7 +82,18 @@ export function PatientRecord() {
                         </Table>
                     </Card>
                 </Tabs.Panel>
-
+                <Tabs.Panel value="third">
+                    <BodyTemp />
+                </Tabs.Panel>
+                <Tabs.Panel value="fourth">
+                    <PulseRate />
+                </Tabs.Panel>
+                <Tabs.Panel value="fifth">
+                    <BloodOxygen />
+                </Tabs.Panel>
+                <Tabs.Panel value="sixth">
+                    <RespirationRate />
+                </Tabs.Panel>
             </Tabs>
         </div>
     );

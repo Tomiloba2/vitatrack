@@ -1,8 +1,23 @@
-.tableRow{
+.tableRow {
     transition: ease-in-out 0.5s;
-    &:hover{
+
+    &:hover {
         cursor: pointer;
         transform: scaleY(1.1);
-        background-color:#e5f5ff ;
+        background-color: #e5f5ff;
+    }
+}
+
+.listItem {
+    &:hover {
+        padding: 10px;
+        border-radius: 15px;
+        background-color: #d4e7fc;
+        cursor: pointer;
+        color: #fff;
+    }
+
+    p {
+        color: #3885df;
     }
 }

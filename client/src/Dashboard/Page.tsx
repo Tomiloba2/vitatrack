@@ -25,7 +25,7 @@ export function Dashboard() {
             <SideBar isClose={close} />
           </Box>
           <Box style={{
-            flex: "4",
+            flex: "6",
             overflow: "auto"
           }}>
             <Container>
