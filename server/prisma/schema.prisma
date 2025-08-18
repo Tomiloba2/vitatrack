@@ -6,7 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
+  output   = "../node_modules/.prisma/client"
 }
 
 datasource db {
@@ -15,19 +15,36 @@ datasource db {
 }
 
 model User {
-  id          String @id @default(cuid())
+  id          String    @id @default(cuid())
   name        String
-  email       String @unique
+  email       String    @unique
   password    String
-  imgUrl      String
-  contactInfo String
+  imgUrl      String?
+  contactInfo String?
+  role        role
+  gender      gender?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  resetToken  String?   @unique
+  expiresIn   DateTime?
+}
+
+enum role {
+  admin
+  doctor
+  nurse
+}
+
+enum gender {
+  male
+  female
 }
 
 model Patient {
   id            String   @id @default(cuid())
   name          String
   Dob           DateTime
-  imgUrl        String
+  imgUrl        String?
   status        Status
   age           Int
   contact       String
@@ -56,4 +73,11 @@ model Vitals {
   bloodOxygenLevel String
   RespirationRate  String
   timeMonitored    DateTime
+}
+
+model Session {
+  id        String   @id
+  sid       String   @unique
+  data      String   @db.MediumText
+  expiresAt DateTime
 }
