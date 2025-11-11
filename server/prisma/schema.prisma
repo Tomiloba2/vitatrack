@@ -10,7 +10,7 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -79,18 +79,12 @@ enum Status {
 
 model Vitals {
   id               String   @id @default(cuid())
-  patient          Patient  @relation(fields: [patientId], references: [id])
-  patientId        String
-  heartRate        String
-  Temperature      String
-  bloodOxygenLevel String
-  RespirationRate  String
-  timeMonitored    DateTime
+  patient          Patient  @relation(fields: [patient_id], references: [id])
+  patient_id       String
+  heart_rate       String
+  temperature      String
+  blood_oxygen     String
+  respiration_rate String
+  time_monitored   DateTime
 }
 
-model Session {
-  id        String   @id
-  sid       String   @unique
-  data      String   @db.MediumText
-  expiresAt DateTime
-}

@@ -9,12 +9,12 @@ export const AddVitals = async (req: Request<{}, {}, AddVitalsType>, res: Respon
         const body = req.body
         const post = await prisma.vitals.create({
             data: {
-                patientId: body.patientId,
-                heartRate: body.heartRate,
-                Temperature: body.Temperature,
-                bloodOxygenLevel: body.bloodOxygenLevel,
-                RespirationRate: body.RespirationRate,
-                timeMonitored: body.timeMonitored
+                patient_id: body.patientId,
+                heart_rate: body.heartRate,
+                temperature: body.Temperature,
+                blood_oxygen: body.bloodOxygenLevel,
+                respiration_rate: body.RespirationRate,
+                time_monitored: body.timeMonitored
             }
         })
         return res.status(201).json(post)
@@ -34,7 +34,7 @@ export const GetVitals = async (req: Request<GetVitalsType>, res: Response, next
         const { id } = req.params
         const post = await prisma.vitals.findMany({
             where: {
-                patientId: id
+                patient_id: id
             }
         })
         return res.status(200).json(post)
