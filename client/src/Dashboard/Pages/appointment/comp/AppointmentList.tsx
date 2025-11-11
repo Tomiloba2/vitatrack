@@ -15,14 +15,14 @@ export function AppointmentList(props: IAppointmentListProps) {
 
   /* -------- disclosure for loading state ----------- */
 
-  const [edit, editObject] = useDisclosure(false)
+  const [edit] = useDisclosure(false)
   const [cancel, cancelObject] = useDisclosure(false)
-  const [isComplete, isCompleteObject] = useDisclosure(false)
+  const [isComplete/* , isCompleteObject */] = useDisclosure(false)
   const [modal, modalObject] = useDisclosure(false)
 
   /* --------update appointment----------- */
 
-  const updateAppiontment = useMutation({
+  /* const updateAppiontment = useMutation({
     mutationKey: ['update-appointment'],
     mutationFn: async (id: string) => {
       try {
@@ -51,7 +51,7 @@ export function AppointmentList(props: IAppointmentListProps) {
         position: "top-right"
       })
     }
-  })
+  }) */
 
   /* --------cancel appointment----------- */
 
@@ -87,7 +87,7 @@ export function AppointmentList(props: IAppointmentListProps) {
   })
   /* --------Mark appointment as complete----------- */
 
-  const MarkAppiontment = useMutation({
+  /* const MarkAppiontment = useMutation({
     mutationKey: ['mark-appointment'],
     mutationFn: async (id: string) => {
       try {
@@ -116,7 +116,7 @@ export function AppointmentList(props: IAppointmentListProps) {
         position: "top-right"
       })
     }
-  })
+  }) */
   return (
     <div>
       <Box>

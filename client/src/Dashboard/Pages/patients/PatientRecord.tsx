@@ -15,7 +15,7 @@ export interface IPatientRecordProps {
 
 export function PatientRecord() {
     const { id } = useParams()
-    const { data: lists, isError, isLoading, error } = useQuery({
+    const { data: lists, isError, isLoading/* , error  */} = useQuery({
         queryKey: ["single-patient"],
         queryFn: async (): Promise<IPatientDetails> => {
             try {
