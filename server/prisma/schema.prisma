@@ -15,18 +15,19 @@ datasource db {
 }
 
 model User {
-  id          String    @id @default(cuid())
+  id          String        @id @default(cuid())
   name        String
-  email       String    @unique
+  email       String        @unique
   password    String
   imgUrl      String?
   contactInfo String?
   role        role
   gender      gender?
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  resetToken  String?   @unique
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  resetToken  String?       @unique
   expiresIn   DateTime?
+  Appointment Appointment[]
 }
 
 enum role {
@@ -40,8 +41,19 @@ enum gender {
   female
 }
 
+model Appointment {
+  id         String   @id @default(cuid())
+  isComplete Boolean  @default(false)
+  dateTime   DateTime
+  patientID  String
+  patient    Patient  @relation(references: [id], fields: [patientID])
+  userId     String
+  user       User     @relation(references: [id], fields: [userId])
+  reason     String
+}
+
 model Patient {
-  id            String   @id @default(cuid())
+  id            String        @id @default(cuid())
   name          String
   Dob           DateTime
   imgUrl        String?
@@ -52,11 +64,12 @@ model Patient {
   bloodGroup    String
   GestationAge  String
   pregnancyType String
-  EDD           String
-  LMP           String
+  EDD           DateTime
+  LMP           DateTime
   GPAL          String
   HighRisk      String
   Vitals        Vitals[]
+  Appointment   Appointment[]
 }
 
 enum Status {
@@ -69,7 +82,7 @@ model Vitals {
   patient          Patient  @relation(fields: [patientId], references: [id])
   patientId        String
   heartRate        String
-  Temperature      Int
+  Temperature      String
   bloodOxygenLevel String
   RespirationRate  String
   timeMonitored    DateTime
