@@ -1,6 +1,6 @@
 import { Box, Container, Drawer, Stack } from "@mantine/core";
-import { Navbar } from "./component/Nav";
-import { SideBar } from "./component/Sidebar";
+import { Navbar } from "./layout/Nav";
+import { SideBar } from "./layout/Sidebar";
 import { useDisclosure } from "@mantine/hooks";
 import { Outlet } from "react-router-dom";
 
@@ -19,7 +19,7 @@ export function Dashboard() {
           display: "flex",
           height: "100%"
         }}>
-          <Box visibleFrom="xs" style={{
+          <Box visibleFrom="sm" style={{
             flex: "1 0 10%",
           }}>
             <SideBar isClose={close} />

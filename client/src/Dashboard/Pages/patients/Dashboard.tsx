@@ -1,4 +1,4 @@
-import { FilterComp } from '../component/Filter';
+import { FilterComp } from './comp/Filter';
 
 export interface IMainDashboardProps {
 }

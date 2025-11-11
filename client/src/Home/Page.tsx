@@ -1,7 +1,9 @@
 import { Feature } from "./comp/Features";
+import { Footer } from "./comp/Footer";
 import { Hero } from "./comp/Hero";
 import { NavBar } from "./comp/Nav";
 import { Box, Container } from "@mantine/core";
+
 
 export interface IHomeProps {
 }
@@ -12,13 +14,16 @@ export function Home() {
       <Container>
         <section>
           <NavBar />
-        </section>
+        </section><br />
         <section>
           <Hero />
-        </section>
+        </section><br />
         <section></section>
         <section>
           <Feature />
+        </section><br /><br />
+        <section>
+          <Footer/>
         </section>
       </Container>
     </Box>

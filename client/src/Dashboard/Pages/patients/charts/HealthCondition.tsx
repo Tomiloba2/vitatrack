@@ -1,11 +1,23 @@
 import { PieChart } from '@mantine/charts';
 import { Box, Paper, Text } from '@mantine/core';
+import { IPatientDetail } from '../../../../Types/PatientLists';
 
+export interface IHealthStatus {
+    lists: IPatientDetail[] | []
+}
 
-export function HealthStatus() {
+export function HealthStatus({ lists }: IHealthStatus) {
     const data = [
-        { name: 'Stable', value: 25, color: 'success-green' },
-        { name: 'Critical', value: 10, color: 'alert-red' }
+        {
+            name: 'Stable',
+            value: lists?.filter(item => item.status === "stable").length,
+            color: 'success-green'
+        },
+        {
+            name: 'Critical',
+            value: lists?.filter(item => item.status === "critical").length,
+            color: 'alert-red'
+        }
     ];
     return (
         <Box style={{

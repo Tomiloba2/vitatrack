@@ -16,9 +16,9 @@ export function SideBar(props: ISideBarProps) {
     const sideNav = [
         { icon: <MdDashboard />, item: "Dashboard", to: "/dashboard" },
         { icon: <MdNotifications />, item: "Notifications", to: "/dashboard/notifications" },
+        { icon: <MdEditCalendar />, item: "Appointment", to: "/dashboard/appointments" },
         { icon: <MdList />, item: "Task", to: "/dashboard/tasks" },
         { icon: <MdPerson />, item: "Profile", to: "/dashboard/profile" },
-        { icon: <MdEditCalendar />, item: "Appointment", to: "/dashboard/appointments" },
         { icon: <MdSettings />, item: "Settings", to: "/dashboard/settings" }
     ]
     return (

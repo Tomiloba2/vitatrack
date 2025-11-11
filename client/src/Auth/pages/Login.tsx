@@ -4,12 +4,30 @@ import { Link, useNavigate } from "react-router-dom";
 import Hero from "../../assests/login.png"
 import { useDisclosure } from "@mantine/hooks";
 import { useForm, isEmail, } from '@mantine/form';
+import axios, { AxiosError } from 'axios'
+import { useMutation } from "@tanstack/react-query";
+import { notifications } from "@mantine/notifications"
+import { motion } from "framer-motion"
+
 export interface ILoginProps {
+}
+
+/* --------------form type declaration ------------------- */
+
+type formType = {
+  email: string;
+  password: string;
+  rememberMe: boolean;
+
 }
 
 export function Login() {
   const [visible, { toggle }] = useDisclosure(false) //toggle password visibility
+  const [loading, loaderObject] = useDisclosure()
   const navigate = useNavigate()
+
+  /* -------------- from validation using @mantine/form ------------------------ */
+
   const form = useForm({
     mode: "uncontrolled",
     initialValues: {
@@ -21,24 +39,59 @@ export function Login() {
       email: isEmail("Invalid email address"),
       password: (value) => (/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@!#$%^&*?])[A-Za-z\d@$!%*?&]{8,}$/.test(value) ? null : "Weak Password. Use 8+ characters with letters, numbers & symbols")
     }
-  }) // handle form state
-  const handleSubmit = form.onSubmit((values) => {
-    console.log(values);
-    navigate('/dashboard')
+  })
+
+  /* -------------------- form mutations -------------------------- */
+
+  const handleLogin = useMutation({
+    mutationFn: async (values: formType) => {
+      loaderObject.toggle()
+      try {
+        const url = `${import.meta.env.VITE_SERVER}/login`
+        const data = await axios.post(url, values)
+        return data.data
+      } catch (error) {
+        console.error(error);
+        throw error
+      }
+    },
+    onSuccess: () => {
+      loaderObject.close()
+      notifications.show({
+        title: 'success',
+        message: "Login successful",
+        color: 'green',
+        position: "top-right"
+      })
+      //navigate('/dashboard')
+    },
+    onError: (error) => {
+      loaderObject.close()
+      notifications.show({
+        title: 'failure',
+        message: error instanceof AxiosError ? error.response?.data.err : error.message,
+        color: 'red',
+        position: "top-right"
+      })
+    }
   })
 
   return (
     <div>
       <Container>
         <Stack gap={40}>
+          {/* ------------------------- navigation bar--------------------------- */}
           <nav>
-            <Box pt={10}>
+            <Box pt={10} style={{
+              cursor: "pointer"
+            }}>
               <Image
                 h={70}
                 w={70}
                 radius={100}
                 src={Logo}
                 alt="vita track logo "
+                onClick={() => navigate('/')}
               />
             </Box>
           </nav>
@@ -50,15 +103,30 @@ export function Login() {
             align={"center"}
           >
             <Box visibleFrom="xs">
-              <Image
-                src={Hero}
-                w={{ xs: 280, sm: 400 }}
-                h={{ base: 350 }}
-                radius={"md"}
-                alt="female doctor reviewing maternal vital signs on a tablet in a hospital setting" />
+              <motion.section
+                initial={{ opacity: 0, x: -300 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.5, duration: 1, ease: "easeInOut" }}
+                viewport={{ once: true }}
+              >
+                <Image
+                  src={Hero}
+                  w={{ xs: 280, sm: 400 }}
+                  h={{ base: 350 }}
+                  radius={"md"}
+                  alt="female doctor reviewing maternal vital signs on a tablet in a hospital setting" />
+              </motion.section>
             </Box>
-            <section>
-              <form method="post" onSubmit={handleSubmit} >
+            <motion.section
+              initial={{ opacity: 0, x: 300 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.5, duration: 1, ease: "easeInOut" }}
+              viewport={{ once: true }}>
+              <form method="post" onSubmit={
+                form.onSubmit((values) => {
+                  handleLogin.mutate(values)
+                })}
+              >
                 <Box w={{ base: "70vw", xs: "40vw", md: "30vw", lg: "30vw", xl: "20vw" }} h={{ base: "60vh" }} style={{
                   display: "flex",
                   justifyContent: "center",
@@ -98,6 +166,7 @@ export function Login() {
                         }}>Forgot password?</Link>
                       </Group>
                       <Button
+                        loading={loading}
                         type="submit"
                       >
                         sign in
@@ -106,7 +175,7 @@ export function Login() {
                   </Paper>
                 </Box>
               </form>
-            </section>
+            </motion.section>
           </Flex>
         </Stack>
       </Container>

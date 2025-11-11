@@ -1,35 +1,28 @@
 import { LineChart } from "@mantine/charts";
 import { Box, Stack, Table, Text } from "@mantine/core";
+import { IVital } from "../../../../Types/PatientLists";
 
-
-export interface IBloodOxygenProps {
+export interface IRespirationRateProps {
+  vitals: IVital[]
 }
 
-export function BloodOxygen() {
-  const data = [
-    { time: '11:00', SpO2: 95 },
-    { time: '11:05', SpO2: 90 },
-    { time: '11:10', SpO2: 91 },
-    { time: '11:15', SpO2: 97 },
-    { time: '11:20', SpO2: 93 },
-    { time: '11:25', SpO2: 98 },
-    { time: '11:30', SpO2: 87 },
-    { time: '11:35', SpO2: 82 },
-    { time: '11:40', SpO2: 84 },
-    { time: '11:45', SpO2: 95 },
-    { time: '11:50', SpO2: 98 },
-    { time: '11:55', SpO2: 90 },
-    { time: '12:00', SpO2: 91 }
-  ];
+export function RespirationRate(props:IRespirationRateProps) {
+  const { vitals } = props
+    const data = vitals?.map((item) => {
+        return {
+            time: new Date(new Date(item.timeMonitored).getTime() + 4 * 60 * 60 * 1000).toLocaleTimeString(),
+            respirationRate: item.RespirationRate
+        }
+    })
   return (
     <div>
       <Box>
         <Stack gap={20}>
-          <Text size='lg' fw={700} p={5}>Blood Oxygen Level</Text>
+          <Text size='lg' fw={700} p={5}>Respiration Rate</Text>
           <LineChart
             h={200}
             data={data}
-            series={[{ name: 'SpO2', label: 'SpO2' }]}
+            series={[{ name: 'respirationRate', label: 'respirationRate' }]}
             dataKey="time"
             type="gradient"
             gradientStops={[
@@ -42,15 +35,15 @@ export function BloodOxygen() {
             ]}
             strokeWidth={5}
             curveType="natural"
-            yAxisProps={{ domain: [80.5, 100] }}
-            valueFormatter={(value) => `${value}%`}
+            yAxisProps={{ domain: [10,30] }}
+            valueFormatter={(value) => `${value} bpm`}
           />
           <Table>
             <Table.Thead>
               <Table.Tr>
 
                 <Table.Th>Time</Table.Th>
-                <Table.Th>Blood Oxygen</Table.Th>
+                <Table.Th>Respiration Rate</Table.Th>
               </Table.Tr>
             </Table.Thead>
             <Table.Tbody>
@@ -58,7 +51,7 @@ export function BloodOxygen() {
                 return (
                   <Table.Tr key={item.time}>
                     <Table.Td><Text c={'dark-gray'}>{item.time}</Text></Table.Td>
-                    <Table.Td><Text c={'dark-gray.8'}>{item.SpO2}%</Text></Table.Td>
+                    <Table.Td><Text c={'dark-gray.8'}>{item.respirationRate} bpm</Text></Table.Td>
                   </Table.Tr>
                 )
               })}

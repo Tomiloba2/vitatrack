@@ -16,13 +16,16 @@ export function NavBar() {
   return (
     <div>
       <Flex justify={"space-between"} align={"center"} wrap={"nowrap"}>
-        <Box p={10}>
+        <Box p={10} style={{
+          cursor:"pointer"
+        }}>
           <Image
             h={70}
             w={70}
             radius={100}
             src={Logo}
             alt="vita track logo "
+            onClick={()=>navigate('/')}
           />
         </Box>
         {/*Burger state */}

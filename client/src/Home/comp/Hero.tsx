@@ -5,13 +5,14 @@ import {
 } from '@mantine/core';
 import { useNavigate } from 'react-router-dom';
 import styles from '../styles.module.css'
+import { motion } from 'framer-motion'
 
 export interface IHeroProps {
 }
 
 export function Hero() {
-    const navigate=useNavigate()
-    const handleClick=()=>{
+    const navigate = useNavigate()
+    const handleClick = () => {
         navigate('/login')
     }
     return (
@@ -23,26 +24,34 @@ export function Hero() {
                 justify={"space-between"}
                 align={"center"}
             >
-                <section>
+                <motion.section
+                    initial={{ opacity: 0, x: -100 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.5, duration: 1, ease: "easeInOut" }}
+                    viewport={{ once: true }}>
                     <Stack justify='center' align={'center'} style={{
-                        textAlign:"center"
+                        textAlign: "center"
                     }}>
                         <Text fw={900} size='xl'>Empowering Care for Expectant Mothers</Text>
                         <Text size='sm'>
                             Vita track delivers real-time vital signs for pregnant patients securely to you.
                             Track their health, stay informed and act fast
                         </Text>
-                        <Button className={styles.cta} onClick={handleClick} w={{base:"50%",xs:"70%",sm:"40%"}}>Explore VitaTrack</Button>
+                        <Button className={styles.cta} onClick={handleClick} w={{ base: "50%", xs: "70%", sm: "40%" }}>Explore VitaTrack</Button>
                     </Stack>
-                </section>
-                <section>
+                </motion.section>
+                <motion.section
+                    initial={{ opacity: 0, x: 100 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.5, duration: 1, ease: "easeInOut" }}
+                    viewport={{ once: true }}>
                     <Image
                         src={hero}
-                        w={{xs:300,sm:400}}
-                        h={{base:350}}
+                        w={{ xs: 300, sm: 400 }}
+                        h={{ base: 350 }}
                         radius={"md"}
                         alt="female doctor reviewing maternal vital signs on a tablet in a hospital setting" />
-                </section>
+                </motion.section>
             </Flex>
         </div>
     );

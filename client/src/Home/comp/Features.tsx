@@ -4,6 +4,7 @@ import maternal from "../../assests/maternal-pulse.jpg"
 import temp from "../../assests/temperature.jpg"
 import blood from "../../assests/blood-oxygen.jpg"
 import styles from '../styles.module.css'
+import { motion } from "framer-motion"
 
 export interface IFeatureProps {
 }
@@ -28,7 +29,13 @@ export function Feature() {
       <Flex wrap={"wrap"} justify={"center"} gap={"lg"}>
         {featureLists.map((item) => {
           return (
-            <section key={item.text} className={styles.features}>
+            <motion.section
+              key={item.text}
+              className={styles.features}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 1, ease: "easeInOut" }}
+              viewport={{ once: true }}>
               <Card shadow="xl" radius='lg'>
 
                 <Card.Section>
@@ -40,7 +47,7 @@ export function Feature() {
                 </Card.Section>
                 <Text size="sm" fw={600}>{item.text}</Text>
               </Card>
-            </section>
+            </motion.section>
           )
         })}
       </Flex>

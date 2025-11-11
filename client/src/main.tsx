@@ -4,11 +4,15 @@ import './index.css'
 import App from './App.tsx'
 import "@mantine/core/styles.css"
 import "@mantine/charts/styles.css"
-import { MantineProvider, createTheme} from "@mantine/core"
+import '@mantine/notifications/styles.css';
+import '@mantine/dates/styles.css';
+import { MantineProvider, createTheme } from "@mantine/core"
+import { Notifications } from "@mantine/notifications"
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 
-const theme=createTheme({
-  colors:{
-    "soft-blue":[
+const theme = createTheme({
+  colors: {
+    "soft-blue": [
       "#e5f5ff",
       "#d2e6fe",
       "#a7cbf4",
@@ -20,7 +24,7 @@ const theme=createTheme({
       "#065fb2",
       "#00529f"
     ],
-    "clean-white":[
+    "clean-white": [
       "#ffffff",
       "#f0fbff",
       "#cdcdcd",
@@ -32,7 +36,7 @@ const theme=createTheme({
       "#656565",
       "#575757"
     ],
-    "muted-teal":[
+    "muted-teal": [
       "#e2fef9",
       "#d4f6ef",
       "#afe9de",
@@ -44,7 +48,7 @@ const theme=createTheme({
       "#1b9d86",
       "#008873"
     ],
-    "warm-gray":[
+    "warm-gray": [
       "#ecf0f1",
       "#e8e8e8",
       "#cfd0d0",
@@ -56,7 +60,7 @@ const theme=createTheme({
       "#5c6d71",
       "#4a5f64"
     ],
-    "alert-red":[
+    "alert-red": [
       "#ffebe8",
       "#ffd6d2",
       "#f6ada5",
@@ -68,7 +72,7 @@ const theme=createTheme({
       "#b61f13",
       "#a0140c"
     ],
-    "success-green":[
+    "success-green": [
       "#e6fef0",
       "#d5f7e3",
       "#adedc8",
@@ -80,7 +84,7 @@ const theme=createTheme({
       "#1aa559",
       "#008f4a"
     ],
-    "dark-gray":[
+    "dark-gray": [
       "#f2f5f8",
       "#e5e7e9",
       "#c5ccd4",
@@ -92,7 +96,7 @@ const theme=createTheme({
       "#4d647d",
       "#34495e"
     ],
-    "light-gray":[
+    "light-gray": [
       "#ecf6fd",
       "#e3e8ec",
       "#bdc3c7",
@@ -104,14 +108,20 @@ const theme=createTheme({
       "#5a676f",
       "#485964"
     ]
-  
+
   }
 })
+
+const queryclient = new QueryClient()
+
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <MantineProvider theme={theme}>
-      <App />
+      <Notifications />
+      <QueryClientProvider client={queryclient}>
+        <App />
+      </QueryClientProvider>
     </MantineProvider>
   </StrictMode>,
 )

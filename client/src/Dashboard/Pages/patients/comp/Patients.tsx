@@ -1,17 +1,11 @@
 import { Avatar, Table, Pagination, Paper, Box } from "@mantine/core";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import styles from '../styles.module.css'
+import styles from '../../../styles.module.css'
+import { IPatientDetail } from "../../../../Types/PatientLists";
 
 export interface IPatientsProps {
-    lists: {
-        img: string;
-        initials: string;
-        name: string;
-        id: number;
-        status: string;
-        lM: string
-    }[]
+    lists: IPatientDetail[]
 }
 
 export function Patients(props: IPatientsProps) {
@@ -21,7 +15,7 @@ export function Patients(props: IPatientsProps) {
     //records to display on apage
     const [recordPerpage] = useState(6)
     //determing the number of pages
-    const numberOfPages = Math.ceil(lists.length / recordPerpage)
+    const numberOfPages = Math.ceil(lists?.length / recordPerpage)
     //current page number
     const [currentPage, setCurrentPage] = useState(1)
     //index of the last record
@@ -35,14 +29,14 @@ export function Patients(props: IPatientsProps) {
 
 
     const rows = currentRecords.map((item) => (
-        <Table.Tr key={item.id} onClick={() => navigate("/dashboard/patient")} className={styles.tableRow}>
+        <Table.Tr key={item.id} onClick={() => navigate(`/dashboard/${item.id}`)} className={styles.tableRow}>
             <Table.Td>
-                <Avatar src={item.img}>{item.initials}</Avatar>
+                <Avatar src={item.imgUrl}>{item.name.slice(0, 2)}</Avatar>
             </Table.Td>
             <Table.Td>{item.name}</Table.Td>
             <Table.Td>{item.id}</Table.Td>
             <Table.Td c={`${item.status === "critical" ? "alert-red" : "success-green"}`}>{item.status}</Table.Td>
-            <Table.Td>{item.lM}</Table.Td>
+            <Table.Td>{item.lastMonitored && new Date(item.lastMonitored).getMinutes()} minutes ago</Table.Td>
         </Table.Tr>
     ))
     return (

@@ -1,34 +1,30 @@
 import { LineChart } from "@mantine/charts";
 import { Box, Stack, Table, Text } from "@mantine/core";
+import { IVital } from "../../../../Types/PatientLists";
 
-export interface IRespirationRateProps {
+
+export interface IBloodOxygenProps {
+  vitals: IVital[]
 }
 
-export function RespirationRate() {
-  const data = [
-    { time: '11:00', respirationRate: 18 },
-    { time: '11:05', respirationRate: 18 },
-    { time: '11:10', respirationRate: 19 },
-    { time: '11:15', respirationRate: 19 },
-    { time: '11:20', respirationRate: 19 },
-    { time: '11:25', respirationRate: 21 },
-    { time: '11:30', respirationRate: 24 },
-    { time: '11:35', respirationRate: 25 },
-    { time: '11:40', respirationRate: 20 },
-    { time: '11:45', respirationRate: 20 },
-    { time: '11:50', respirationRate: 17 },
-    { time: '11:55', respirationRate: 17 },
-    { time: '12:00', respirationRate: 17 }
-  ];
+export function BloodOxygen(props:IBloodOxygenProps) {
+  const { vitals } = props
+    const data = vitals?.map((item) => {
+        return {
+            time: new Date(new Date(item.timeMonitored).getTime() + 4 * 60 * 60 * 1000).toLocaleTimeString(),
+            SpO2: item.bloodOxygenLevel
+        }
+    })
+  
   return (
     <div>
       <Box>
         <Stack gap={20}>
-          <Text size='lg' fw={700} p={5}>Respiration Rate</Text>
+          <Text size='lg' fw={700} p={5}>Blood Oxygen Level</Text>
           <LineChart
             h={200}
             data={data}
-            series={[{ name: 'respirationRate', label: 'respirationRate' }]}
+            series={[{ name: 'SpO2', label: 'SpO2' }]}
             dataKey="time"
             type="gradient"
             gradientStops={[
@@ -41,15 +37,15 @@ export function RespirationRate() {
             ]}
             strokeWidth={5}
             curveType="natural"
-            yAxisProps={{ domain: [10,30] }}
-            valueFormatter={(value) => `${value} bpm`}
+            yAxisProps={{ domain: [80.5, 100] }}
+            valueFormatter={(value) => `${value}%`}
           />
           <Table>
             <Table.Thead>
               <Table.Tr>
 
                 <Table.Th>Time</Table.Th>
-                <Table.Th>Respiration Rate</Table.Th>
+                <Table.Th>Blood Oxygen</Table.Th>
               </Table.Tr>
             </Table.Thead>
             <Table.Tbody>
@@ -57,7 +53,7 @@ export function RespirationRate() {
                 return (
                   <Table.Tr key={item.time}>
                     <Table.Td><Text c={'dark-gray'}>{item.time}</Text></Table.Td>
-                    <Table.Td><Text c={'dark-gray.8'}>{item.respirationRate} bpm</Text></Table.Td>
+                    <Table.Td><Text c={'dark-gray.8'}>{item.SpO2}%</Text></Table.Td>
                   </Table.Tr>
                 )
               })}

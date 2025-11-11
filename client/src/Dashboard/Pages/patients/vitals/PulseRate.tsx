@@ -1,36 +1,31 @@
 import { LineChart } from "@mantine/charts";
 import { Box, Stack, Table, Text } from "@mantine/core";
+import { IVital } from "../../../../Types/PatientLists";
 
 
-export interface IBodyTempProps {
+export interface IPulseRateProps {
+    vitals: IVital[]
 }
 
-export function BodyTemp() {
-    const data = [
-        { date: '11:00', temperature: 37.0 },
-        { date: '11:05', temperature: 37.0 },
-        { date: '11:10', temperature: 37.1 },
-        { date: '11:15', temperature: 37.2 },
-        { date: '11:20', temperature: 37.2 },
-        { date: '11:25', temperature: 37.3 },
-        { date: '11:30', temperature: 37.3 },
-        { date: '11:35', temperature: 36.4 },
-        { date: '11:40', temperature: 36.5 },
-        { date: '11:45', temperature: 37.2 },
-        { date: '11:50', temperature: 36.9 },
-        { date: '11:55', temperature: 36.7 },
-        { date: '12:00', temperature: 37.5 }
-    ];
+
+export function PulseRate(props: IPulseRateProps) {
+    const { vitals } = props
+    const data = vitals?.map((item) => {
+        return {
+            time: new Date(new Date(item.timeMonitored).getTime() + 4 * 60 * 60 * 1000).toLocaleTimeString(),
+            pulseRate: item.heartRate
+        }
+    })
     return (
         <div>
             <Box>
                 <Stack gap={20}>
-                    <Text size='lg' fw={700} p={5}>Body  Temperature</Text>
+                    <Text size='lg' fw={700} p={5}>Pulse Rate</Text>
                     <LineChart
                         h={200}
                         data={data}
-                        series={[{ name: 'temperature', label: 'Avg. Temperature' }]}
-                        dataKey="date"
+                        series={[{ name: 'pulseRate', label: 'pulseRate' }]}
+                        dataKey="time"
                         type="gradient"
                         gradientStops={[
                             { offset: 0, color: 'red.6' },
@@ -42,23 +37,23 @@ export function BodyTemp() {
                         ]}
                         strokeWidth={5}
                         curveType="natural"
-                        yAxisProps={{ domain: [35.5, 38.5] }}
-                        valueFormatter={(value) => `${value}°C`}
+                        yAxisProps={{ domain: [80.5, 120] }}
+                        valueFormatter={(value) => `${value}bpm`}
                     />
                     <Table>
                         <Table.Thead>
                             <Table.Tr>
 
                                 <Table.Th>Time</Table.Th>
-                                <Table.Th>Temperature</Table.Th>
+                                <Table.Th>Pulse Rate</Table.Th>
                             </Table.Tr>
                         </Table.Thead>
                         <Table.Tbody>
                             {data.map((item) => {
                                 return (
-                                    <Table.Tr key={item.date}>
-                                        <Table.Td><Text c={'dark-gray'}>{item.date}</Text></Table.Td>
-                                        <Table.Td><Text c={'dark-gray.8'}>{item.temperature}°C</Text></Table.Td>
+                                    <Table.Tr key={item.time}>
+                                        <Table.Td><Text c={'dark-gray'}>{item.time}</Text></Table.Td>
+                                        <Table.Td><Text c={'dark-gray.8'}>{item.pulseRate}bpm</Text></Table.Td>
                                     </Table.Tr>
                                 )
                             })}
