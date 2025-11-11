@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "install-server": "npm install",
-    "build": "rimraf ./dist && npx tsc",
+    "build": "rimraf ./dist && npx prisma generate && npx tsc",
     "prestart": "npm run build",
     "start": "node dist/app.js",
     "predev": "npm run build",
