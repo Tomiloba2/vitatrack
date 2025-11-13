@@ -26,7 +26,7 @@ export const signup = async (req: Request<{}, {}, signupType>, res: Response, ne
                 name: req.body.name,
                 email: req.body.email,
                 password: await bcrypt.hash(req.body.password, salt),
-                role:"admin"
+                role:"admin",
             }
         })
         const {

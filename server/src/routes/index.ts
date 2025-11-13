@@ -4,7 +4,6 @@ import { forgotPasswordSchema, resetPasswordSchema, signinSchema, signupSchema }
 import { fetchUser, forgotPassword, getSession, login, logout, resetPassword, signup, verifyJwt } from "../controllers/auth.js"
 import { AddPatient, GetAPatients, GetPatients } from "../controllers/dashboard.js"
 import { AddPatientSchema, GetAPatientsSchema } from "../schema/dashboard.js"
-import isAuthenticated from "../middleware/isAuthenticated.js"
 import { AddVitalsSchema, DeleteVitalsSchema, GetVitalsSchema } from "../schema/vitals.js"
 import { AddVitals, deleteVitals, GetVitals } from "../controllers/vitals.js"
 import { completeAppointmentSchema, createAppointmentSchema, updateAppointmentSchema } from "../schema/appointments.js"
@@ -26,14 +25,14 @@ router.route('/get-users').get(fetchUser)
 
 /* ------------------------ Dashboard Routes ------------------------- */
 
-router.route('/add-patient').post(/* isAuthenticated, */ validate(AddPatientSchema), AddPatient)
-router.route('/get-patients').get(/* isAuthenticated, */GetPatients)
+router.route('/add-patient').post(validate(AddPatientSchema), AddPatient)
+router.route('/get-patients').get(GetPatients)
 router.route('/get-patient/:id').get(validate(GetAPatientsSchema), GetAPatients)
 
 /* ------------------------ Vitals Routes ------------------------- */
 
-router.route('/add-vitals').post(isAuthenticated, validate(AddVitalsSchema), AddVitals)
-router.route('/delete-patients/:id').get(validate(DeleteVitalsSchema), deleteVitals)
+router.route('/add-vitals').post(validate(AddVitalsSchema), AddVitals)
+router.route('/delete-vitals/:id').get(validate(DeleteVitalsSchema), deleteVitals)
 router.route('/get-vitals/:id').get(validate(GetVitalsSchema), GetVitals)
 
 /* ------------------------ Appointments Routes ------------------------- */

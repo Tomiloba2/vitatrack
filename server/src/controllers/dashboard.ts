@@ -27,7 +27,7 @@ export async function GetAPatients(req: Request<GetAPatientsType, {}, {}>, res: 
                 id: id
             },
             include:{
-                Vitals:true
+                vitals:true
             }
         })
         return res.status(200).json(user)

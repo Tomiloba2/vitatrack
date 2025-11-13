@@ -32,9 +32,17 @@ export const GetVitals = async (req: Request<GetVitalsType>, res: Response, next
     prisma.$connect
     try {
         const { id } = req.params
+        const now = new Date()
+        const timeInterval = new Date(now.getTime() - 1 * 60 * 1000)
         const post = await prisma.vitals.findMany({
             where: {
-                patient_id: id
+                patient_id: id/* ,
+                time_monitored: {
+                    gte: timeInterval
+                } */
+            },
+            orderBy: {
+                time_monitored: 'asc'
             }
         })
         return res.status(200).json(post)
