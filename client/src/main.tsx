@@ -9,7 +9,6 @@ import '@mantine/dates/styles.css';
 import { MantineProvider, createTheme } from "@mantine/core"
 import { Notifications } from "@mantine/notifications"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
-import { ClerkProvider } from "@clerk/clerk-react"
 
 const theme = createTheme({
   colors: {
@@ -114,18 +113,15 @@ const theme = createTheme({
 })
 
 const queryclient = new QueryClient()
-const publisherKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
 
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <ClerkProvider publishableKey={publisherKey}>
-      <MantineProvider theme={theme}>
+          <MantineProvider theme={theme}>
         <Notifications />
         <QueryClientProvider client={queryclient}>
           <App />
         </QueryClientProvider>
       </MantineProvider>
-    </ClerkProvider>
   </StrictMode>,
 )
