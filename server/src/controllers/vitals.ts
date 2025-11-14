@@ -9,12 +9,12 @@ export const AddVitals = async (req: Request<{}, {}, AddVitalsType>, res: Respon
         const body = req.body
         const post = await prisma.vitals.create({
             data: {
-                patient_id: body.patientId,
-                heart_rate: body.heartRate,
-                temperature: body.Temperature,
-                blood_oxygen: body.bloodOxygenLevel,
-                respiration_rate: body.RespirationRate,
-                time_monitored: body.timeMonitored
+                patient_id: body.patient_id,
+                heart_rate: body.heart_rate,
+                temperature: body.temperature,
+                blood_oxygen: body.blood_oxygen,
+                respiration_rate: body.respiration_rate,
+                time_monitored: body.time_monitored
             }
         })
         return res.status(201).json(post)

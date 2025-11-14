@@ -61,11 +61,11 @@ model user {
 model vitals {
   id               String   @id @default(cuid())
   patient_id       String
-  heart_rate       String
-  temperature      String
-  blood_oxygen     String
-  respiration_rate String
-  time_monitored   DateTime
+  heart_rate       String?
+  temperature      String?
+  blood_oxygen     String?
+  respiration_rate String?
+  time_monitored   DateTime?
   patient          patient  @relation(fields: [patient_id], references: [id])
 
   @@index([patient_id], map: "Vitals_patient_id_fkey")
