@@ -103,7 +103,7 @@ export function PatientRecord() {
                                         display: "flex",
                                         alignItems: "center"
                                     }}>
-                                        <Image h={160} w={160} src={''} radius={'lg'} />
+                                        <Image h={160} w={160} src={''} radius={'lg'} alt={"MA"} />
                                     </Card.Section>
                                     <Table>
                                         <Table.Tbody>
