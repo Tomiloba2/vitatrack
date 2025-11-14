@@ -8,7 +8,7 @@ import { router } from "./routes/index.js"
 const app = express()
 /* ----------------express CORS configuration------------------------ */
 const corsOpt: CorsOptions = {
-    origin: ["http://localhost:5173"],
+    origin: ["http://localhost:5173","https://vitatrack.onrender.com"],
     methods: ["POST", "GET", "PUT", "PATCH", "DELETE"],
     credentials: true
 }
