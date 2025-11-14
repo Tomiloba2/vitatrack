@@ -35,7 +35,7 @@ export function RespirationRate(props:IRespirationRateProps) {
             ]}
             strokeWidth={3}
             curveType="natural"
-            yAxisProps={{ domain: [10,30] }}
+            yAxisProps={{ domain: [14,23] }}
             valueFormatter={(value) => `${value} bpm`}
           />
           <Table>

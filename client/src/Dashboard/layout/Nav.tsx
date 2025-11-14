@@ -1,7 +1,7 @@
 import { Avatar, Box, Flex, Group, Image, Paper, Text, Tooltip } from "@mantine/core";
 import logo from "../../assests/logo.png"
 import {
-    MdNotifications, MdSettings, MdLogout,
+    MdNotifications, /* MdSettings, */ MdLogout,
     MdMenu
 } from "react-icons/md"
 import { useNavigate } from "react-router-dom";
@@ -60,14 +60,14 @@ export function Navbar(props: INavbarProps) {
                                 fontSize: "20px",
                                 cursor: "pointer"
                             }} />
-                    </Box>
+                    </Box>{/* 
                     <Box id='settings'>
                         <MdSettings onClick={() => navigate('/dashboard/settings')}
                             style={{
                                 color: "gray",
                                 fontSize: "20px",
                                 cursor: "pointer"
-                            }} /></Box>
+                            }} /></Box> */}
                     <Box id='logout'> <MdLogout 
                     onClick={()=>handleLogout}
                     style={{

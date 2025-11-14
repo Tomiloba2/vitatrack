@@ -39,7 +39,7 @@ export function BodyTemp(props: IBodyTempProps) {
                             ]}
                             strokeWidth={3}
                             curveType="natural"
-                            yAxisProps={{ domain: [35.5, 38.5] }}
+                            yAxisProps={{ domain: [28.5, 38.5] }}
                             valueFormatter={(value) => `${value}°C`}
                         />
                     </Box>
