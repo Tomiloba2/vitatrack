@@ -11,8 +11,8 @@ export function BodyTemp(props: IBodyTempProps) {
     const { vitals } = props
     const data = vitals?.map((item) => {
         return {
-            date: new Date(new Date(item.timeMonitored).getTime() + 4 * 60 * 60 * 1000).toLocaleTimeString(),
-            temperature: item.Temperature
+            date: new Date(new Date(item.time_monitored).getTime() + 4 * 60 * 60 * 1000).toLocaleTimeString(),
+            temperature: item.temperature
         }
     })
     console.log(vitals);
@@ -37,7 +37,7 @@ export function BodyTemp(props: IBodyTempProps) {
                                 { offset: 80, color: 'cyan.5' },
                                 { offset: 100, color: 'blue.5' },
                             ]}
-                            strokeWidth={5}
+                            strokeWidth={3}
                             curveType="natural"
                             yAxisProps={{ domain: [35.5, 38.5] }}
                             valueFormatter={(value) => `${value}°C`}

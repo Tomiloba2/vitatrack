@@ -16,13 +16,13 @@ export interface IPatientDetail {
     status: string;
 }
 export interface IVital {
-    RespirationRate: string;
-    Temperature: string;
-    bloodOxygenLevel: string;
-    heartRate: string;
+    respiration_rate: string;
+    temperature: string;
+    blood_oxygen: string;
+    heart_rate: string;
     id: string;
-    patientId: string;
-    timeMonitored: Date;
+    patient_id: string;
+    time_monitored: Date;
 }
 export interface IPatientDetails extends IPatientDetail {
     Vitals: IVital[]

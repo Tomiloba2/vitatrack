@@ -1,5 +1,4 @@
 import { Box, Card, Image, Skeleton, Table, Tabs, Text } from "@mantine/core";
-import Img from "../../../assests/file_000000002aa0620aa3f9d707cb9f0974 (1).png"
 import { useParams } from "react-router-dom";
 import { BodyTemp } from "./vitals/BodyTemperature";
 import { PulseRate } from "./vitals/PulseRate";
@@ -31,13 +30,15 @@ export function PatientRecord() {
         queryKey: ["single-patient-vitals"],
         queryFn: async (): Promise<IVital[]> => {
             try {
-                const datlists = await axios.get(`${import.meta.env.VITE_SERVER}/get-vitals/${id}`)
-                return datlists.data
+                const datalists = await axios.get(`${import.meta.env.VITE_SERVER}/get-vitals/${id}`)
+                return datalists.data
             } catch (error) {
                 console.error(error);
                 throw error
             }
-        }
+        },
+        refetchInterval:60000,
+        refetchOnWindowFocus:true,
     })
     const patientIdentification = [
         { name: "Patient Name", value: lists?.name },
@@ -102,7 +103,7 @@ export function PatientRecord() {
                                         display: "flex",
                                         alignItems: "center"
                                     }}>
-                                        <Image h={160} w={160} src={Img} radius={'lg'} />
+                                        <Image h={160} w={160} src={''} radius={'lg'} />
                                     </Card.Section>
                                     <Table>
                                         <Table.Tbody>

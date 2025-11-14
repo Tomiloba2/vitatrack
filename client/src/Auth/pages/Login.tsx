@@ -63,7 +63,7 @@ export function Login() {
         color: 'green',
         position: "top-right"
       })
-      //navigate('/dashboard')
+      navigate('/dashboard')
     },
     onError: (error) => {
       loaderObject.close()

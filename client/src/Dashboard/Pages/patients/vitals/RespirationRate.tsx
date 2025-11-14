@@ -10,8 +10,8 @@ export function RespirationRate(props:IRespirationRateProps) {
   const { vitals } = props
     const data = vitals?.map((item) => {
         return {
-            time: new Date(new Date(item.timeMonitored).getTime() + 4 * 60 * 60 * 1000).toLocaleTimeString(),
-            respirationRate: item.RespirationRate
+            time: new Date(new Date(item.time_monitored).getTime() + 4 * 60 * 60 * 1000).toLocaleTimeString(),
+            respirationRate: item.respiration_rate
         }
     })
   return (
@@ -33,7 +33,7 @@ export function RespirationRate(props:IRespirationRateProps) {
               { offset: 80, color: 'cyan.5' },
               { offset: 100, color: 'blue.5' },
             ]}
-            strokeWidth={5}
+            strokeWidth={3}
             curveType="natural"
             yAxisProps={{ domain: [10,30] }}
             valueFormatter={(value) => `${value} bpm`}

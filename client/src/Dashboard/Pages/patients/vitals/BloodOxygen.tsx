@@ -11,8 +11,8 @@ export function BloodOxygen(props:IBloodOxygenProps) {
   const { vitals } = props
     const data = vitals?.map((item) => {
         return {
-            time: new Date(new Date(item.timeMonitored).getTime() + 4 * 60 * 60 * 1000).toLocaleTimeString(),
-            SpO2: item.bloodOxygenLevel
+            time: new Date(new Date(item.time_monitored).getTime() + 4 * 60 * 60 * 1000).toLocaleTimeString(),
+            SpO2: item.blood_oxygen
         }
     })
   
@@ -35,7 +35,7 @@ export function BloodOxygen(props:IBloodOxygenProps) {
               { offset: 80, color: 'cyan.5' },
               { offset: 100, color: 'blue.5' },
             ]}
-            strokeWidth={5}
+            strokeWidth={3}
             curveType="natural"
             yAxisProps={{ domain: [80.5, 100] }}
             valueFormatter={(value) => `${value}%`}

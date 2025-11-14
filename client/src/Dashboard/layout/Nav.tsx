@@ -49,7 +49,7 @@ export function Navbar(props: INavbarProps) {
                         src={''}
                         alt={"Doctor name"}
                     >IA</Avatar>
-                    <Text size="xs">Isaac Adedara</Text>
+                    <Text size="xs">Adedara I</Text>
                 </Box>
                 <Group p={{xs:"20"}}>
                     <Box hiddenFrom="sm"><MdMenu color="gray" cursor={"pointer"} size={20} onClick={props.isOpen} /></Box>

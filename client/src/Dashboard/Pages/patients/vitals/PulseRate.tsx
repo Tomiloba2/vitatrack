@@ -12,8 +12,8 @@ export function PulseRate(props: IPulseRateProps) {
     const { vitals } = props
     const data = vitals?.map((item) => {
         return {
-            time: new Date(new Date(item.timeMonitored).getTime() + 4 * 60 * 60 * 1000).toLocaleTimeString(),
-            pulseRate: item.heartRate
+            time: new Date(new Date(item.time_monitored).getTime() + 4 * 60 * 60 * 1000).toLocaleTimeString(),
+            pulseRate: item.heart_rate
         }
     })
     return (
@@ -35,7 +35,7 @@ export function PulseRate(props: IPulseRateProps) {
                             { offset: 80, color: 'cyan.5' },
                             { offset: 100, color: 'blue.5' },
                         ]}
-                        strokeWidth={5}
+                        strokeWidth={3}
                         curveType="natural"
                         yAxisProps={{ domain: [80.5, 120] }}
                         valueFormatter={(value) => `${value}bpm`}
